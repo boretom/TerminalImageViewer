@@ -2,8 +2,8 @@
 CXX ?= g++
 
 # append necessary arguments
-override CPPFLAGS += -std=c++17 -Wall -fpermissive -fexceptions -O2
-override LDFLAGS  += -lstdc++fs -pthread -s
+override CPPFLAGS += -std=c++11 -Wall -fpermissive -fexceptions -O2
+override LDFLAGS  += -lstdc++fs -pthread -s -ljpeg
 
 all: tiv
 
