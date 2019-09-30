@@ -9,6 +9,7 @@
 
 #define cimg_display 0
 #define cimg_use_jpeg 0
+//#define cimg_use_magick 0
 #include "CImg.h"
 
 //using namespace std;
@@ -426,9 +427,10 @@ enum Mode {AUTO, THUMBNAILS, FULL_SIZE};
 /* Wrapper around CImg<T>(const char*) to ensure the result has 3 channels as RGB
  */
 cimg_library::CImg<unsigned char> load_rgb_CImg(const char * const filename) {
-    std::cout << "[tomtom] in load_rgb_CImg" << std::endl;
+    std::cout << "[tomtom/0] in load_rgb_CImg" << std::endl;
 	cimg_library::CImg<unsigned char> image(filename);
-    std::cout << "[tomtom] in load_rgb_CImg after image(filename)" << std::endl;
+    std::cout << "[tomtom/1] in load_rgb_CImg after image(filename)" << std::endl;
+    std::cout << "[tomtom/2] filename: " << filename << std::endl;
 	if(image.spectrum() == 1) {
 		// Greyscale. Just copy greyscale data to all channels
 		cimg_library::CImg<unsigned char> rgb_image(image.width(), image.height(), image.depth(), 3);
@@ -444,6 +446,8 @@ cimg_library::CImg<unsigned char> load_rgb_CImg(const char * const filename) {
 int main(int argc, char* argv[]) {
   int maxWidth = 80;
   int maxHeight = 24;
+  //int maxWidth = w.ws_col * 4;
+  //int maxHeight = w.ws_row * 8;
   bool sizeDetectionSuccessful = true;
   struct winsize w;
   int ioStatus = ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -496,7 +500,8 @@ int main(int argc, char* argv[]) {
     } else if (arg[0] == '-') {
       //std::cerr << "Unrecognized argument: " << arg << std::endl;
         std::cout << "reading from stdin" << std::endl;
-        file_names.push_back("/dev/stdin");
+        //file_names.push_back("/dev/stdin");
+        file_names.push_back(arg);
 //        file_names.push_back("/usr/local/stdin.jpg");
     } else {
       if (std::experimental::filesystem::is_directory(arg)) {
@@ -515,9 +520,6 @@ int main(int argc, char* argv[]) {
   if (mode == FULL_SIZE || (mode == AUTO && file_names.size() == 1)) {
     for (unsigned int i = 0; i < file_names.size(); i++) {
       try {
-          FILE *f = cimg_library::cimg::std_fopen(file_names[i].c_str(), "rb");
-          int p = std::ftell(f);
-          std::cout << "[tomtom] file pos: " << std::to_string(p) << std::endl;
 	cimg_library::CImg<unsigned char> image = load_rgb_CImg(file_names[i].c_str());
       
 	if (image.width() > maxWidth || image.height() > maxHeight) {

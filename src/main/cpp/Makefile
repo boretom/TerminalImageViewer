@@ -4,6 +4,7 @@ CXX ?= g++
 # append necessary arguments
 override CPPFLAGS += -std=c++11 -Wall -fpermissive -fexceptions -O2
 override LDFLAGS  += -lstdc++fs -pthread -s -ljpeg
+#override LDFLAGS  += -lstdc++fs -pthread -s
 
 all: tiv
 
