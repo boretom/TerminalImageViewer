@@ -6,9 +6,11 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_INIT(tiv, 1.0)
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
-dnl Switch to a C++ compiler, and check if it works
+# Switch to a C++ compiler, and check if it works
 AC_LANG(C++)
-AC_PROG_CXX([g++-8 g++])
+# Especally for macOS since clang won't support <experimental/filesystem>
+# up to including macOS 10.14. You want to install gcc or llvm with homebrew
+AC_PROG_CXX([g++-9 g++-8 g++ clang++ llvm-g++])
 
 AM_CONFIG_HEADER(config.h)
 
@@ -20,7 +22,7 @@ dnl AM_MAINTAINER_MODE
 
 AC_CANONICAL_HOST
 
-dnl Require C++11 compiler
+# Require C++11 compiler
 AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory], [nodefault])
 
 TIV_CPPFLAGS=" -Wall -fpermissive -fexceptions -O2"
