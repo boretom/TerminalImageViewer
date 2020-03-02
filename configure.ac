@@ -33,7 +33,21 @@ AC_SUBST(TIV_CPPFLAGS)
 AC_SUBST(TIV_LDFLAGS)
 AC_SUBST(TIV_LIBS)
 
-dnl AC_SEARCH_LIBS([libstdc++fs],, AC_MSG_ERROR([required lib file missing]))
+AC_CHECK_HEADER(experimental/filesystem, ,[AC_MSG_ERROR([Could not find experimental/filesystem...libstdc++fs developement package required])])
+AC_MSG_CHECKING([for experimental/filesystem::is_directory() support])
+AC_COMPILE_IFELSE([
+		AC_LANG_PROGRAM([
+				#include <experimental/filesystem>
+			],
+			[
+				std::experimental::filesystem::is_directory("some-dir");
+			])], AC_MSG_RESULT([yes]),
+				AC_MSG_RESULT([[no]])
+				AC_MSG_ERROR([[experimental/filesystem::is_directory is needed, on macOS install GNU gcc using `brew`]])
+		)
+
+#			 [ax_cv_cxx_have_filesystem_dir=yes], [ax_cv_cxx_have_filesystem_dir=no])
+# g++-9 -std=c++11 -lstdc++fs -o - conftest.cpp
 
 AC_CONFIG_FILES([
  Makefile
