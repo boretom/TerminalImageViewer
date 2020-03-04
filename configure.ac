@@ -25,8 +25,8 @@ AC_CANONICAL_HOST
 # Require C++17 compiler
 AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory], [nodefault])
 
-AC_CHECK_HEADER(experimental/filesystem, ,[AC_MSG_ERROR([Could not find experimental/filesystem...libstdc++fs developement package required])])
-AC_MSG_CHECKING([for experimental/filesystem::is_directory() support])
+AC_CHECK_HEADER(filesystem, ,[AC_MSG_ERROR([Could not find filesystem...libstdc++fs developement package required])])
+AC_MSG_CHECKING([for filesystem::is_directory() support])
 AC_COMPILE_IFELSE([
 		AC_LANG_PROGRAM([
 				#include <experimental/filesystem>
@@ -35,7 +35,7 @@ AC_COMPILE_IFELSE([
 				std::experimental::filesystem::is_directory("some-dir");
 			])], AC_MSG_RESULT([yes]),
 				AC_MSG_RESULT([[no]])
-				AC_MSG_ERROR([[experimental/filesystem::is_directory is needed, on macOS install GNU gcc using `brew`]])
+				AC_MSG_ERROR([[filesystem::is_directory is needed, on macOS install GNU gcc using `brew`]])
 		)
 
 #			 [ax_cv_cxx_have_filesystem_dir=yes], [ax_cv_cxx_have_filesystem_dir=no]
