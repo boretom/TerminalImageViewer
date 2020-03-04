@@ -10,11 +10,8 @@
 #define cimg_display 0
 #include "CImg.h"
 
-//using namespace std;
-#include <experimental/filesystem>
-namespace fs {
-		using namespace std::experimental::filesystem;
-}
+#include <filesystem>
+namespace fs = std::filesystem;
 
 const int FLAG_FG = 1;
 const int FLAG_BG = 2;

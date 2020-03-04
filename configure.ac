@@ -22,8 +22,8 @@ dnl AM_MAINTAINER_MODE
 
 AC_CANONICAL_HOST
 
-# Require C++11 compiler
-AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory], [nodefault])
+# Require C++17 compiler
+AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory], [nodefault])
 
 AC_CHECK_HEADER(experimental/filesystem, ,[AC_MSG_ERROR([Could not find experimental/filesystem...libstdc++fs developement package required])])
 AC_MSG_CHECKING([for experimental/filesystem::is_directory() support])
