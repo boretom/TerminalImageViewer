@@ -46,7 +46,14 @@ AC_COMPILE_IFELSE([
 				AC_MSG_ERROR([[experimental/filesystem::is_directory is needed, on macOS install GNU gcc using `brew`]])
 		)
 
-#			 [ax_cv_cxx_have_filesystem_dir=yes], [ax_cv_cxx_have_filesystem_dir=no])
+#			 [ax_cv_cxx_have_filesystem_dir=yes], [ax_cv_cxx_have_filesystem_dir=no]
+#		)
+#AS_IF([test "x$ax_cv_cxx_have_filesystem_dir" = "xyes"], [
+#  AC_MSG_NOTICE([Do the stuff needed for enabling the feature])
+#])
+#AS_IF([test "x$ax_cv_cxx_have_filesystem_dir" = "xno"], [
+#  AC_MSG_NOTICE([Don't the stuff needed for enabling the feature])
+#])
 # g++-9 -std=c++11 -lstdc++fs -o - conftest.cpp
 
 AC_CONFIG_FILES([
