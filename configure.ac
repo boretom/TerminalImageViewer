@@ -4,7 +4,7 @@ AC_PREREQ([2.60])
 AC_CONFIG_MACRO_DIR([m4])
 
 AC_INIT(tiv, 1.0)
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_INIT_AUTOMAKE([subdir-objects -Wall -Werror foreign ])
 
 # Switch to a C++ compiler, and check if it works
 AC_LANG(C++)
@@ -24,14 +24,6 @@ AC_CANONICAL_HOST
 
 # Require C++11 compiler
 AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory], [nodefault])
-
-TIV_CPPFLAGS=" -Wall -fpermissive -fexceptions -O2"
-TIV_LDFLAGS=" -pthread"
-TIV_LIBS+=" -lstdc++fs"
-
-AC_SUBST(TIV_CPPFLAGS)
-AC_SUBST(TIV_LDFLAGS)
-AC_SUBST(TIV_LIBS)
 
 AC_CHECK_HEADER(experimental/filesystem, ,[AC_MSG_ERROR([Could not find experimental/filesystem...libstdc++fs developement package required])])
 AC_MSG_CHECKING([for experimental/filesystem::is_directory() support])
@@ -58,7 +50,6 @@ AC_COMPILE_IFELSE([
 
 AC_CONFIG_FILES([
  Makefile
- src/main/cpp/Makefile
 ])
 dnl Process Makefile.in to create Makefile
 AC_OUTPUT

@@ -1,5 +1,0 @@
-bin_PROGRAMS = tiv
-tiv_SOURCES  = tiv.cpp
-AM_CPPFLAGS  = @TIV_CPPFLAGS@
-AM_LDFLAGS   = @TIV_LDFLAGS@
-LIBS         = @TIV_LIBS@
