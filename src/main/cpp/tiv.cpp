@@ -6,12 +6,15 @@
 #include <vector>
 #include <array>
 #include <sys/ioctl.h>
-#include <experimental/filesystem>
 
 #define cimg_display 0
 #include "CImg.h"
 
 //using namespace std;
+#include <experimental/filesystem>
+namespace fs {
+		using namespace std::experimental::filesystem;
+}
 
 const int FLAG_FG = 1;
 const int FLAG_BG = 2;
@@ -499,9 +502,9 @@ int main(int argc, char* argv[]) {
     } else if (arg[0] == '-') {
       std::cerr << "Unrecognized argument: " << arg << std::endl;
     } else {
-      if (std::experimental::filesystem::is_directory(arg)) {
-         for (auto & p : std::experimental::filesystem::directory_iterator(arg)) {
-           if (std::experimental::filesystem::is_regular_file(p.path())) {
+      if (fs::is_directory(arg)) {
+         for (auto & p : fs::directory_iterator(arg)) {
+           if (fs::is_regular_file(p.path())) {
              file_names.push_back(p.path().string());
            }
          }
