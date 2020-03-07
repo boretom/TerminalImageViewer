@@ -1,3 +1,9 @@
+# CMake
+build/
+
+# misc noise
+*.swp
+
 ###C++###
 
 # Prerequisites
